@@ -1,4 +1,4 @@
-package com.vikram.model;
+package com.vikram.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
