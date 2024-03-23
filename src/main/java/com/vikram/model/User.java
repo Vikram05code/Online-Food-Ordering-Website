@@ -1,6 +1,7 @@
 package com.vikram.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vikram.domain.USER_ROLE;
 import com.vikram.dto.RestaurantDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

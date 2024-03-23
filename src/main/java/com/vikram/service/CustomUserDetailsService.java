@@ -1,6 +1,6 @@
 package com.vikram.service;
 
-import com.vikram.model.USER_ROLE;
+import com.vikram.domain.USER_ROLE;
 import com.vikram.model.User;
 import com.vikram.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
