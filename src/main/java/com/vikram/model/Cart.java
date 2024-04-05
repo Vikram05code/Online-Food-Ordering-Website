@@ -9,25 +9,22 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity
 public class Cart {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToOne
-    private User cutomer;
-
-    private Long total;
+    @JoinColumn(name = "customer_id")
+    private User customer;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> item = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 
-
+    private Long total;
 
 }

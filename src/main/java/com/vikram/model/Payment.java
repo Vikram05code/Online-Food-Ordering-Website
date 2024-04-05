@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class Payment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,5 +23,6 @@ public class Payment {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
 
 }

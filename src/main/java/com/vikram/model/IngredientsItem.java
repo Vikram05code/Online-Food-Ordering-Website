@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class IngredientsItem {
 
     @Id
@@ -26,6 +26,7 @@ public class IngredientsItem {
     private Restaurant restaurant;
 
     private boolean inStoke=true;
+
 
 
 }

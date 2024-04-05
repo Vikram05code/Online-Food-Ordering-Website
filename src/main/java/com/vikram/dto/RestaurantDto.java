@@ -10,6 +10,8 @@ import java.util.List;
 @Embeddable
 public class RestaurantDto {
 
+    private Long id;
+
     private String title;
 
     @Column(length=1000)

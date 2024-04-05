@@ -7,18 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
+@Data
 public class Notification {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @ManyToOne
-   @JoinColumn(name="recipient_id")
+   @JoinColumn(name = "recipient_id")
    private User customer;
 
    @ManyToOne

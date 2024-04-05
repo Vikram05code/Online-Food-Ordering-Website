@@ -1,12 +1,13 @@
 package com.vikram.repository;
 
-import com.vikram.model.Event;
+
+import com.vikram.model.Events;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventRepository extends JpaRepository<Events, Long> {
 
-    public List<Event> findEventsByRestaurantId(Long id);
+    public List<Events> findEventsByRestaurantId(Long id);
 
 }

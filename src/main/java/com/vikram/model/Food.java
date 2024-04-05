@@ -10,41 +10,40 @@ import java.util.Date;
 import java.util.List;
 
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
 public class Food {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String foodName;
-
+    private String name;
     private String description;
-
     private Long price;
 
     @ManyToOne
     private Category foodCategory;
 
-    @Column(length = 1000)
+
     @ElementCollection
+    @Column(length = 1000)
     private List<String> images;
 
     private boolean available;
 
+    //    @JsonIgnore
     @ManyToOne
     private Restaurant restaurant;
 
     private boolean isVegetarian;
-
     private boolean isSeasonal;
 
     @ManyToMany
-    private List<IngredientsItem> ingredients = new ArrayList<>();
+    private List<IngredientsItem> ingredients=new ArrayList<>();
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
 

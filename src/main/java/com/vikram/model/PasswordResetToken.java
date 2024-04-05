@@ -22,7 +22,7 @@ public class PasswordResetToken {
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     private @NonNull User user;
 
-    private @NonNull Date expiryDate;
+    private @NonNull  Date expiryDate;
 
     public boolean isExpired() {
         return expiryDate.before(new Date());

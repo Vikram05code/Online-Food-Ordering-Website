@@ -9,15 +9,14 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="orders")
+@Data
+@Table(name = "orders")
 public class Order {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -29,21 +28,23 @@ public class Order {
 
     private Long totalAmount;
 
-    private String oderStatus;
+    private String orderStatus;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @ManyToOne
     private Address deliveryAddress;
 
+    //	@JsonIgnore
     @OneToMany
     private List<OrderItem> items;
 
- //   private Payment payment;
+    @OneToOne
+    private Payment payment;
 
-    private int totalItems;
+    private int totalItem;
 
     private int totalPrice;
-
 
 }

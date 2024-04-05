@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity
 public class Coupon {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,5 +23,6 @@ public class Coupon {
     private Date validityPeriod;
 
     private String termsAndConditions;
+
 
 }

@@ -8,14 +8,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class CartItem {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonIgnore
@@ -27,10 +26,9 @@ public class CartItem {
 
     private int quantity;
 
-    private List<String> ingredient;
+    private List<String> ingredients;
 
     private Long totalPrice;
-
 
 
 }

@@ -7,25 +7,22 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Data
 public class OrderItem {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     private Food food;
 
     private int quantity;
-
     private Long totalPrice;
 
     private List<String> ingredients;
 
-
-
 }
+
