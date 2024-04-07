@@ -31,6 +31,13 @@ public class RestaurantController {
         return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
+    @GetMapping()
+    public ResponseEntity<List<Restaurant>> getAllRestaurants(){
+        List<Restaurant> restaurants = restaurantService.getAllRestaurant();
+
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
+
     
 
 
