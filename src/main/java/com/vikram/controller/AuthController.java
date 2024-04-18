@@ -121,7 +121,7 @@ public class AuthController {
         if(userDetails==null){
             throw new BadCredentialsException("Invalid UserName or Password");
         }
-        if(passwordEncoder.matches(password, userDetails.getPassword())){
+        if(!passwordEncoder.matches(password, userDetails.getPassword())){
             throw new BadCredentialsException("Invalid UserName or Password");
         }
 
@@ -129,6 +129,9 @@ public class AuthController {
 
         return authentication;
     }
+
+
+    
 
 
 }
