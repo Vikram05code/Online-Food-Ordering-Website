@@ -4,12 +4,17 @@ import com.vikram.Exception.UserException;
 import com.vikram.config.JwtProvider;
 import com.vikram.domain.USER_ROLE;
 import com.vikram.model.Cart;
+import com.vikram.model.PasswordResetToken;
 import com.vikram.model.User;
 import com.vikram.repository.CartRepository;
 import com.vikram.repository.UserRepository;
 import com.vikram.request.LoginRequest;
+import com.vikram.request.ResetPasswordRequest;
+import com.vikram.response.ApiResponse;
 import com.vikram.response.AuthResponse;
 import com.vikram.service.CustomUserDetailsService;
+import com.vikram.service.PasswordResetTokenService;
+import com.vikram.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +27,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,6 +50,12 @@ public class AuthController {
     private JwtProvider jwtProvider;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private PasswordResetTokenService passwordResetTokenService;
+
+    @Autowired
+    private UserService userService;
 
 
     @PostMapping("/signup")
@@ -131,6 +139,54 @@ public class AuthController {
     }
 
 
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse> resetPassword(
+
+            @RequestBody ResetPasswordRequest req) throws UserException {
+
+        PasswordResetToken resetToken = passwordResetTokenService.findByToken(req.getToken());
+
+        if (resetToken == null ) {
+            throw new UserException("token is required...");
+        }
+        if(resetToken.isExpired()) {
+            passwordResetTokenService.delete(resetToken);
+            throw new UserException("token get expired...");
+
+        }
+
+        // Update user's password
+        User user = resetToken.getUser();
+        userService.updatePassword(user, req.getPassword());
+
+        // Delete the token
+        passwordResetTokenService.delete(resetToken);
+
+        ApiResponse res=new ApiResponse();
+        res.setMessage("Password updated successfully.");
+        res.setStatus(true);
+
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/reset-password-request")
+    public ResponseEntity<ApiResponse> resetPassword(@RequestParam("email") String email) throws UserException {
+        User user = userService.findUserByEmail(email);
+        System.out.println("ResetPasswordController.resetPassword()");
+
+        if (user == null) {
+            throw new UserException("user not found");
+        }
+
+        userService.sendPasswordResetEmail(user);
+
+        ApiResponse res=new ApiResponse();
+        res.setMessage("Password reset email sent successfully.");
+        res.setStatus(true);
+
+        return ResponseEntity.ok(res);
+    }
     
 
 
